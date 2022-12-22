@@ -1,16 +1,15 @@
-const dotenv = require("dotenv");
-// const mongoose = require('mongoose');
+const dotenv = require("dotenv").config()
 const express = require('express');
 const app = express();
-const PORT = process.env.PORT || 3000;
 
-// Dotenv
-dotenv.config({ path: './config.env' });
+// Port
+const PORT = process.env.PORT || 3000;
 
 // Database Connectio
 require('./db/conn');
 // const User = require('./model/userSchema');
 
+// Listion Json
 app.use(express.json());
 
 // Router Port Listoning
@@ -23,5 +22,5 @@ app.use(require('./router/routh'));
 // }
 
 app.listen(PORT, () => {
-    console.log(`server is runnig at port no ${PORT}`);
+    console.log(`server is runnig at port no http://localhost:${PORT}`);
 })
