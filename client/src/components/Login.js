@@ -2,10 +2,11 @@ import React from "react";
 
 const Login = () => {
   return (
-    <section className="container m-5">
+    <section className="container m-5 card">
+      <h1>Log in</h1>
       <form>
         <div className="form-group row">
-          <label for="emil" className="col-sm-2 col-form-label">
+          <label htmlFor="emil" className="col-sm-2 col-form-label">
             Email
           </label>
           <div className="col-sm-10">
@@ -19,7 +20,7 @@ const Login = () => {
           </div>
         </div>
         <div className="form-group row">
-          <label for="password" className="col-sm-2 col-form-label">
+          <label htmlFor="password" className="col-sm-2 col-form-label">
             Password
           </label>
           <div className="col-sm-10">

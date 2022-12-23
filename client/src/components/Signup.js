@@ -20,7 +20,7 @@ const Signup = () => {
   // Post Data to Database
   const postData = async (e) => {
     e.preventDefault();
-    const {name, email, phone, password, cpassword} = user;
+    const { name, email, phone, password, cpassword } = user;
     const res = await fetch("/register", {
       method: "POST",
       headers: {
@@ -46,7 +46,8 @@ const Signup = () => {
     }
   };
   return (
-    <section className="container m-5">
+    <section className="container mt-5 pb-3 card">
+      <h1>Register</h1>
       <form method="POST" action="/register">
         <div className="form-row">
           <div className="form-group col-md-6">
