@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { unstable_HistoryRouter } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 const Signup = () => {
-  const History = unstable_HistoryRouter;
+  const Navigate = useNavigate;
   // Get Data of Form
   const [user, setUser] = useState({
     name: "",
@@ -37,18 +37,18 @@ const Signup = () => {
     const data = res.json();
     console.log(data);
     if (!data || res.status === 422) {
-      window.alert("Invalid Registration");
-      console.log("Invalid Registration");
+      window.alert("Invalid Credentials");
+      console.log("Invalid Credentials");
     } else {
       window.alert("User Registration Successfully");
       console.log("User Registration Successfully");
-      History.push("/login");
+      Navigate("/login");
     }
   };
   return (
     <section className="container mt-5 pb-3 card">
       <h1>Register</h1>
-      <form method="POST" action="/register">
+      <form method="POST" >
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="name">Name</label>

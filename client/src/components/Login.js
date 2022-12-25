@@ -1,10 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
+const { useNavigate } = require('react-router-dom');
 
 const Login = () => {
+  // set UseState
+  const Navigate = useNavigate();
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const loginUser = async (e) => {
+    e.preventDefault();
+    const res = await fetch('/signin', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        password,
+      }),
+    });
+
+    const data = res.json();
+    if (!data || res.status === 400) {
+      alert("Invalid Credentials");
+    } else {
+      alert("Login Successfully");
+      Navigate("/about");
+    }
+  }
   return (
-    <section className="container m-5 card">
+    <section className="container mt-5 pt-5 pb-5 pl-4 pr-4 card con">
       <h1>Log in</h1>
-      <form>
+      <form method="POST">
         <div className="form-group row">
           <label htmlFor="emil" className="col-sm-2 col-form-label">
             Email
@@ -13,7 +40,10 @@ const Login = () => {
             <input
               type="email"
               className="form-control"
+              autoComplete="true"
               placeholder="123@gmail.com"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               name="email"
               id="email"
             />
@@ -27,6 +57,9 @@ const Login = () => {
             <input
               type="password"
               className="form-control"
+              autoComplete="true"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
               name="password"
               id="password"
             />
@@ -34,7 +67,7 @@ const Login = () => {
         </div>
         <div className="form-group row">
           <div className="col-sm-10">
-            <button type="submit" className="btn btn-primary">
+            <button type="submit" className="btn btn-primary" onClick={loginUser}>
               Sign in
             </button>
           </div>

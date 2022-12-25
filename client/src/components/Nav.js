@@ -5,7 +5,7 @@ const Nav = () => {
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <Link className="navbar-brand" to="#">
-        Mern
+        Mern2
       </Link>
       <button
         className="navbar-toggler"

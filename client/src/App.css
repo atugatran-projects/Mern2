@@ -7,11 +7,17 @@
   text-align: center;
 }
 
+.con{
+  width: 100%;
+  height: 60vh;
+  display: flex;
+}
+
 .dflex p {
   width: 60vw;
 }
 
 .pfixed{
-  position: fixed;
+  position: relative;
   bottom: 0;
 }

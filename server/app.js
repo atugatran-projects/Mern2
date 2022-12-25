@@ -1,4 +1,5 @@
-const dotenv = require("dotenv").config()
+const dotenv = require('dotenv').config()
+var cookieParser = require('cookie-parser')
 const express = require('express');
 const app = express();
 
@@ -11,6 +12,7 @@ require('./db/conn');
 
 // Listion Json
 app.use(express.json());
+app.use(cookieParser())
 
 // Router Port Listoning
 app.use(require('./router/routh'));

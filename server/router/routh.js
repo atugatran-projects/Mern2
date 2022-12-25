@@ -3,7 +3,8 @@ const router = express.Router();
 require("../db/conn");
 const User = require("../model/userSchema");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
+const Middleware = require("../middleware/middleware");
 
 // Root Req
 router.get("/", (req, res) => {
@@ -55,17 +56,24 @@ router.post("/signin", async (req, res) => {
   try {
     const { email, password } = req.body;
     // If Filled Empty
+    console.log(req.body);
     if (!email || !password) {
-      return res.status(422).json({ error: "Hi Plz fill the field" });
+      return res.status(400).json({ error: "Hi Plz fill the field" });
     }
     // its Password Hash
     // if Email Exist in Databasr
     const userLogin = await User.findOne({ email: email });
 
     if (userLogin) {
+      // Set Cookies
+      const token = await userLogin.generateAuthToken();
+      console.log(token);
+      res.cookie("jwtoken", token, {
+        expires: new Date(Date.now() + 86400000),
+        httpOnly: true,
+      });
       // check Password
       const isMatch = await bcrypt.compare(password, userLogin.password);
-      const token = await userLogin.generateAuthToken();
       if (!isMatch) {
         return res.status(400).json({ error: "Invalid Credienials" });
       } else {
@@ -77,6 +85,17 @@ router.post("/signin", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+});
+
+// Login Req
+router.get("/about", Middleware, (req, res) => {
+  // Send Message
+  // console.log("Hello this is About");
+  res.send(req.rootUser);
+  // console.log("This is Your Tokken ====>" + req.token);
+  // console.log("This is Your user ====>" + req.rootUser);
+  // res.send(req.token);
+  // res.send("hi this is About");
 });
 
 module.exports = router;
