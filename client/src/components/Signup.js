@@ -36,9 +36,12 @@ const Signup = () => {
     });
     const data = res.json();
     console.log(data);
-    if (!data || res.status === 422) {
+    if (!data) {
       window.alert("Invalid Credentials");
       console.log("Invalid Credentials");
+    } else if (res.status === 422) {
+      window.alert("Already User Signup");
+      console.log("Already User Signup");
     } else {
       window.alert("User Registration Successfully");
       console.log("User Registration Successfully");
@@ -48,7 +51,7 @@ const Signup = () => {
   return (
     <section className="container mt-5 pb-3 card">
       <h1>Register</h1>
-      <form method="POST" >
+      <form method="POST">
         <div className="form-row">
           <div className="form-group col-md-6">
             <label htmlFor="name">Name</label>

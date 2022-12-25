@@ -58,6 +58,7 @@ const Login = () => {
               type="password"
               className="form-control"
               autoComplete="true"
+              placeholder="Enter your password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               name="password"

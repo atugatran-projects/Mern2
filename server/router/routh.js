@@ -5,6 +5,7 @@ const User = require("../model/userSchema");
 const bcrypt = require("bcryptjs");
 // const jwt = require("jsonwebtoken");
 const Middleware = require("../middleware/middleware");
+const { response } = require("express");
 
 // Root Req
 router.get("/", (req, res) => {
@@ -87,15 +88,60 @@ router.post("/signin", async (req, res) => {
   }
 });
 
-// Login Req
+//? Login Req
 router.get("/about", Middleware, (req, res) => {
-  // Send Message
-  // console.log("Hello this is About");
+  //? Send Message
+  //* console.log("Hello this is About");
   res.send(req.rootUser);
-  // console.log("This is Your Tokken ====>" + req.token);
-  // console.log("This is Your user ====>" + req.rootUser);
-  // res.send(req.token);
-  // res.send("hi this is About");
+  //* console.log("This is Your Tokken ====>" + req.token);
+  //* console.log("This is Your user ====>" + req.rootUser);
+  //* res.send(req.token);
+  //* res.send("hi this is About");
+});
+
+// Get Data for Contact && Home page
+router.get("/getData", Middleware, (req, res) => {
+  // Send Message
+  // console.log("Hello this is getData");
+  res.send(req.rootUser);
+});
+
+// Contact Req
+router.post("/contact", Middleware, async (req, res) => {
+  try {
+    console.log(req.body);
+    const { name, email, phone, message } = req.body;
+    if (!name || !email || !phone || !message) {
+      console.log("Plzz Enter This Fields");
+      return res.status(422).json({ error: "Hi Plz fill the field" });
+    }
+    const userContact = await User.findOne({ _id: req.userID });
+    console.log(userContact);
+    if (userContact) {
+      const userMessage = await userContact.addMessage(
+        name,
+        email,
+        phone,
+        message
+      );
+      await userContact.save();
+      res.status(201).json({ message: "User Message Sent Successfully" });
+    }
+  } catch (error) {
+    console.log(error);
+  }
+
+  // Logout Page
+  router.get("/logout", Middleware, (req, res) => {
+    //? Send Message
+     console.log("Hello this is logout!");
+    res.clearCookie("jwtoken", { path: "/" });
+    res.status(200).send("User Logout");
+    //* console.log("This is Your Tokken ====>" + req.token);
+    //* console.log("This is Your user ====>" + req.rootUser);
+    //* res.send(req.token);
+    //* res.send("hi this is About");
+  });
 });
 
 module.exports = router;
