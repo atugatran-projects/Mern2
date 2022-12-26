@@ -35,16 +35,16 @@ const Signup = () => {
       }),
     });
     const data = res.json();
-    console.log(data);
+    // console.log(data);
     if (!data) {
       window.alert("Invalid Credentials");
-      console.log("Invalid Credentials");
+      // console.log("Invalid Credentials");
     } else if (res.status === 422) {
       window.alert("Already User Signup");
-      console.log("Already User Signup");
+      // console.log("Already User Signup");
     } else {
       window.alert("User Registration Successfully");
-      console.log("User Registration Successfully");
+      // console.log("User Registration Successfully");
       Navigate("/login");
     }
   };

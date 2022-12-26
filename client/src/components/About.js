@@ -24,7 +24,7 @@ const About = () => {
         // Navigate("/");
       }
     } catch (error) {
-      console.log("No Token Found");
+      // console.log("No Token Found");
       Navigate("/login");
     }
   };

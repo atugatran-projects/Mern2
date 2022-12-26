@@ -9,4 +9,6 @@ mongoose
   .then(() => {
     console.log(`connnection successful`);
   })
-  .catch((err) => console.log(`no connection ` + err));
+  .catch((err) => 
+  console.log(`no connection ` + err)
+  );

@@ -130,18 +130,14 @@ router.post("/contact", Middleware, async (req, res) => {
   } catch (error) {
     console.log(error);
   }
+});
 
-  // Logout Page
-  router.get("/logout", Middleware, (req, res) => {
-    //? Send Message
-     console.log("Hello this is logout!");
-    res.clearCookie("jwtoken", { path: "/" });
-    res.status(200).send("User Logout");
-    //* console.log("This is Your Tokken ====>" + req.token);
-    //* console.log("This is Your user ====>" + req.rootUser);
-    //* res.send(req.token);
-    //* res.send("hi this is About");
-  });
+// Logout Page
+router.get("/logout", (req, res) => {
+  //? Send Message
+  console.log("Hello this is logout!");
+  res.clearCookie("jwtoken", { path: "/" });
+  res.status(200).send("User Logout");
 });
 
 module.exports = router;

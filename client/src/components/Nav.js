@@ -1,5 +1,71 @@
-import React from "react";
+import { UserContext } from "../App";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
+
+const RenderMenu = () => {
+  const { state } = useContext(UserContext);
+  if (state) {
+    return (
+      <>
+        <li className="nav-item active">
+          <Link className="nav-link" to="/">
+            Home <span className="sr-only">(current)</span>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/about">
+            About
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/contact">
+            Contact
+          </Link>
+        </li>
+        {/* <li className="nav-item">
+          <Link className="nav-link" to="/signup">
+            Register
+          </Link>
+        </li> */}
+        <li className="nav-item">
+          <Link className="nav-link" to="/logout">
+            logout
+          </Link>
+        </li>
+      </>
+    );
+  } else {
+    return (
+      <>
+        <li className="nav-item active">
+          <Link className="nav-link" to="/">
+            Home <span className="sr-only">(current)</span>
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/about">
+            About
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/contact">
+            Contact
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/signup">
+            Register
+          </Link>
+        </li>
+        <li className="nav-item">
+          <Link className="nav-link" to="/login">
+            login
+          </Link>
+        </li>
+      </>
+    );
+  }
+};
 
 const Nav = () => {
   return (
@@ -21,36 +87,7 @@ const Nav = () => {
 
       <div className="collapse navbar-collapse" id="navbarSupportedContent">
         <ul className="navbar-nav ml-auto">
-          <li className="nav-item active">
-            <Link className="nav-link" to="/">
-              Home <span className="sr-only">(current)</span>
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/about">
-              About
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/contact">
-              Contact
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/login">
-              Login
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/signup">
-              Signup
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/logout">
-              logout
-            </Link>
-          </li>
+          <RenderMenu />
         </ul>
       </div>
     </nav>

@@ -30,13 +30,13 @@ const Contact = () => {
         // Navigate("/");
       }
     } catch (error) {
-      console.log("No Token Found");
+      // console.log("No Token Found");
     }
   };
 
   useEffect(() => {
     userContact();
-  }, []);
+  });
 
   //   We Are Storing Data in State
   const handleInput = (e) => {

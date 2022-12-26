@@ -16,7 +16,7 @@ const Middleware = async (req, res, next) => {
         next();
     } catch (error) {
         res.status(401).send("Unauthenticated: No token found")
-        console.log(error);
+        // console.log(error);
     }
 }
 module.exports = Middleware;

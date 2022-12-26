@@ -1,18 +1,20 @@
-import React, { useState } from "react";
-const { useNavigate } = require('react-router-dom');
+import { UserContext } from "../App";
+import React, { useState, useContext } from "react";
+const { useNavigate } = require("react-router-dom");
 
 const Login = () => {
-  // set UseState
   const Navigate = useNavigate();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  // const { state, dispatch } = useContext(UserContext);
+  const { dispatch } = useContext(UserContext);
+  
   const loginUser = async (e) => {
     e.preventDefault();
-    const res = await fetch('/signin', {
-      method: 'POST',
+    const res = await fetch("/signin", {
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
         email,
@@ -24,10 +26,11 @@ const Login = () => {
     if (!data || res.status === 400) {
       alert("Invalid Credentials");
     } else {
+      dispatch({ type: "USER", payload: true });
       alert("Login Successfully");
       Navigate("/about");
     }
-  }
+  };
   return (
     <section className="container mt-5 pt-5 pb-5 pl-4 pr-4 card con">
       <h1>Log in</h1>
@@ -68,7 +71,11 @@ const Login = () => {
         </div>
         <div className="form-group row">
           <div className="col-sm-10">
-            <button type="submit" className="btn btn-primary" onClick={loginUser}>
+            <button
+              type="submit"
+              className="btn btn-primary"
+              onClick={loginUser}
+            >
               Sign in
             </button>
           </div>
