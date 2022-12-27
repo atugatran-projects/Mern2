@@ -7,7 +7,7 @@ const About = () => {
   // console.log(userData);
   const callAboutPage = async () => {
     try {
-      const res = await fetch("/about", {
+      const res = await fetch("http://localhost:5000/about", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -43,7 +43,7 @@ const About = () => {
               {userData === undefined ? "3524634613461436437374" : userData._id}
             </p>
             <p>
-              <strong>Name  =) </strong>
+              <strong>Name =) </strong>
               {userData === undefined ? "Name" : userData.name}
             </p>
             <p>

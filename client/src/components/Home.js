@@ -5,14 +5,14 @@ const Home = () => {
   const [show, setShow] = useState(false);
   const userHome = async () => {
     try {
-      const res = await fetch("/getData", {
+      const res = await fetch("http://localhost:5000/getData", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await res.json();
-      setUserName(data.name)
+      setUserName(data.name);
       setShow(true);
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -30,9 +30,9 @@ const Home = () => {
     <>
       <section className="dflex">
         <main role="main" className="inner cover">
-       <h2>{show ? "Hello," : "WELCOME To My Project"}</h2>
-       <h1>{show ? userName : ""}</h1>
-       <h2>{show ? "Happy to See You Back" : "By Atul"}</h2>
+          <h2>{show ? "Hello," : "WELCOME To My Project"}</h2>
+          <h1>{show ? userName : ""}</h1>
+          <h2>{show ? "Happy to See You Back" : "By Atul"}</h2>
         </main>
       </section>
     </>

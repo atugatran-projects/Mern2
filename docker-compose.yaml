@@ -1,0 +1,56 @@
+version: '3.9'
+services:
+  # Database
+  database:
+    container_name: database
+    image: mongo
+    restart: always
+    networks:
+      - mern-stack-network
+    ports:
+      - 27017:27017
+    volumes:
+      - ./database/db:/data/db
+    environment:
+      # - MONGO_INITDB_ROOT_USERNAME=root
+      # - MONGO_INITDB_ROOT_PASSWORD=secret
+      - MONGO_INITDB_DATABASE=mern2
+  # client
+  client:
+    build:
+      context: './client'
+      dockerfile: dockerfile
+    ports:
+      - 3000:3000
+    container_name: client_con
+    image: client
+    environment:
+      - WATCHPACK_POLLING=true
+    networks:
+      - mern-stack-network
+    volumes:
+      - ./client:/app
+    depends_on:
+      - server
+  # Server
+  server:
+    build:
+      context: './server'
+      dockerfile: dockerfile
+    ports:
+      - 5000:5000
+    container_name: server_con
+    image: server
+    networks:
+      - mern-stack-network
+    volumes:
+      - ./server:/app
+    depends_on:
+      - database
+    environment:
+      - DATABASE=mongodb://database:27017/mern2
+      - PORT=5000
+      - SECRET_KEY=fbfebernbtehbfdhrethbfherhORJHIOEJTHIOtjhnpoigjnoitjTJHpoijjOJREORJOEJHJKOrkjehopporjhpKREHOEKPkopkehjoPKERlkmhkldmntonmsgonmwrtotrkmnotekmotknenmoknpoETKOKJMPODKTPOKMEOPTJKNEokopknektnopeOKRJONETKOENKER
+
+networks:
+  mern-stack-network:

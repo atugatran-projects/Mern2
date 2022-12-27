@@ -5,7 +5,7 @@ const { useNavigate } = require("react-router-dom");
 const Logout = () => {
   const Navigate = useNavigate();
   // const {state, dispatch} = useContext(UserContext)
-  const { dispatch} = useContext(UserContext)
+  const { dispatch } = useContext(UserContext);
   // Proises
   useEffect(() => {
     fetch("/logout", {
@@ -14,11 +14,11 @@ const Logout = () => {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
-      credentials: "include"
+      credentials: "include",
     })
       .then((response) => {
         Navigate("/login");
-        dispatch({type: "USER", payload:false})
+        dispatch({ type: "USER", payload: false });
         if (response.status !== 200) {
           const error = new Error(response.error);
           throw error;
@@ -27,7 +27,7 @@ const Logout = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, [dispatch,Navigate]);
+  }, [dispatch, Navigate]);
   return (
     <>
       <h1>Logout Ka Page</h1>

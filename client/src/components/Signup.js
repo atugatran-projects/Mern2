@@ -21,7 +21,7 @@ const Signup = () => {
   const postData = async (e) => {
     e.preventDefault();
     const { name, email, phone, password, cpassword } = user;
-    const res = await fetch("/register", {
+    const res = await fetch("http://localhost:5000/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,9 +39,11 @@ const Signup = () => {
     if (!data) {
       window.alert("Invalid Credentials");
       // console.log("Invalid Credentials");
-    } else if (res.status === 422) {
+    } else if (res.status === 422 ) {
       window.alert("Already User Signup");
       // console.log("Already User Signup");
+    }else if(res.status === 500){
+      window.alert("Server Error");
     } else {
       window.alert("User Registration Successfully");
       // console.log("User Registration Successfully");

@@ -9,7 +9,7 @@ const Contact = () => {
   });
   const userContact = async () => {
     try {
-      const res = await fetch("/getData", {
+      const res = await fetch("http://localhost:5000/getData", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

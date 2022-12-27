@@ -1,28 +1,24 @@
-const dotenv = require('dotenv').config()
-var cookieParser = require('cookie-parser')
-const express = require('express');
+require("dotenv").config();
+var cookieParser = require("cookie-parser");
+const express = require("express");
+const cors = require("cors");
 const app = express();
 
 // Port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Database Connectio
-require('./db/conn');
-// const User = require('./model/userSchema');
+require("./db/conn");
 
-// Listion Json
+// Resource using app
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
+app.use(cors());
+
+// Router
+app.use(require("./router/routh"));
 
 // Router Port Listoning
-app.use(require('./router/routh'));
-
-// Middelware 
-// const middleware = (req,res, next) => {
-//     console.log(`Hello my Middleware`);
-//     next();
-// }
-
 app.listen(PORT, () => {
-    console.log(`server is runnig at port no http://localhost:${PORT}`);
-})
+  console.log(`server is runnig at port no http://localhost:${PORT}`);
+});
