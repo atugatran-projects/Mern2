@@ -35,7 +35,7 @@ const Login = () => {
     <section className="container mt-5 pt-5 pb-5 pl-4 pr-4 card con">
       <h1>Log in</h1>
       <form method="POST">
-        <div className="form-group row">
+        <div classNam̥e="form-group row">
           <label htmlFor="emil" className="col-sm-2 col-form-label">
             Email
           </label>
