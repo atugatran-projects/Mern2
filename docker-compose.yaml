@@ -3,7 +3,7 @@ services:
   # Database
   database:
     container_name: database
-    image: mongo
+    image: mongo:6.0.3
     restart: always
     networks:
       - mern-stack-network
@@ -11,10 +11,10 @@ services:
       - 27017:27017
     volumes:
       - ./database/db:/data/db
-    environment:
-      - MONGO_INITDB_ROOT_USERNAME=root
-      - MONGO_INITDB_ROOT_PASSWORD=secret
-      - MONGO_INITDB_DATABASE=mern2
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME=root
+    #   - MONGO_INITDB_ROOT_PASSWORD=secret
+    #   - MONGO_INITDB_DATABASE=mern2
   # client
   client:
     build:
@@ -23,7 +23,7 @@ services:
     ports:
       - 3000:3000
     container_name: client_con
-    image: client
+    image: client:18.12.0-alpine
     environment:
       - WATCHPACK_POLLING=true
     networks:
@@ -40,7 +40,7 @@ services:
     ports:
       - 5000:5000
     container_name: server_con
-    image: server
+    image: server:18.12.0-alpine
     networks:
       - mern-stack-network
     volumes:
