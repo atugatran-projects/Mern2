@@ -1,17 +1,19 @@
 import React, { useState, useEffect } from "react";
+const BackendURL = process.env.REACT_APP_BackendURL;
 
 const Home = () => {
   const [userName, setUserName] = useState({});
   const [show, setShow] = useState(false);
   const userHome = async () => {
     try {
-      const res = await fetch("/getData", {
+      const res = await fetch(BackendURL+"/getData", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await res.json();
+      // console.log("UserName ======="+ data);
       setUserName(data.name)
       setShow(true);
       if (!res.status === 200) {

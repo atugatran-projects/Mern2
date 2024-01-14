@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const DB = process.env.DATABASE;
+// const DB = "mongodb://localhost:27017/mern-login";
 mongoose.set("strictQuery", true);
 
 mongoose

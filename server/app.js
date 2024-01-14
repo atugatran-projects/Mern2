@@ -1,10 +1,13 @@
-const dotenv = require('dotenv').config()
+require('dotenv').config()
 var cookieParser = require('cookie-parser')
 const express = require('express');
+const cors = require("cors");
 const app = express();
 
+app.use(cors());
+
 // Port
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 // Database Connectio
 require('./db/conn');
@@ -24,5 +27,5 @@ app.use(require('./router/routh'));
 // }
 
 app.listen(PORT, () => {
-    console.log(`server is runnig at port no http://localhost:${PORT}`);
+    console.log(`server is runnig at port no ${PORT}`);
 })
