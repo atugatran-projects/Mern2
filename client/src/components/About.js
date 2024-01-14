@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-const BackendURL = process.env.REACT_APP_BackendURL;
 const { useNavigate } = require("react-router-dom");
+let BackendURL = process.env.REACT_APP_BackendURL
 
 const About = () => {
   const Navigate = useNavigate();
@@ -8,17 +8,16 @@ const About = () => {
   // console.log(userData);
   const callAboutPage = async () => {
     try {
-      const res = await fetch(BackendURL+"/aboutBackend", {
+      const res = await fetch(BackendURL+"/about", {
         method: "GET",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        // credentials: "include",
+        credentials: "include",
       });
       const data = await res.json();
-      console.log("This is Code");
-      console.log(data);
+      // console.log(data);
       setUserData(data);
       if (!res.status === 200) {
         const error = new Error(res.error);
@@ -27,7 +26,7 @@ const About = () => {
       }
     } catch (error) {
       // console.log("No Token Found");
-      // Navigate("/login");
+      Navigate("/login");
     }
   };
 

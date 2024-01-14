@@ -2,8 +2,6 @@ const jwt = require('jsonwebtoken');
 const User = require('../model/userSchema');
 
 const Middleware = async (req, res, next) => {
-    // res.send(req)
-    res.send(req.cookies.jwtoken)
     try {
         const token = req.cookies.jwtoken;
         const verifierToken = jwt.verify(token, process.env.SECRET_KEY);
@@ -17,7 +15,7 @@ const Middleware = async (req, res, next) => {
         req.userID = rootUser._id;
         next();
     } catch (error) {
-        // res.status(401).send("Unauthenticated: No token found")
+        res.status(401).send("Unauthenticated: No token found")
         // console.log(error);
     }
 }

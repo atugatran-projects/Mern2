@@ -3,7 +3,7 @@ const router = express.Router();
 require("../db/conn");
 const User = require("../model/userSchema");
 const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
+// const jwt = require("jsonwebtoken");
 const Middleware = require("../middleware/middleware");
 const { response } = require("express");
 
@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 });
 
 // Register Req
-router.post("/register", async (req, res) => {
+router.post("/register",async (req, res) => {
   // Send Message
   // console.log(req.body);
   // res.json({ message: req.body });
@@ -64,16 +64,15 @@ router.post("/signin", async (req, res) => {
     // its Password Hash
     // if Email Exist in Databasr
     const userLogin = await User.findOne({ email: email });
-    
+
     if (userLogin) {
       // Set Cookies
       const token = await userLogin.generateAuthToken();
-      console.log("This is Token" + token);
+      console.log(token);
       res.cookie("jwtoken", token, {
         expires: new Date(Date.now() + 86400000),
         httpOnly: true,
       });
-      console.log("Signin Progress ....");
       // check Password
       const isMatch = await bcrypt.compare(password, userLogin.password);
       if (!isMatch) {
@@ -90,21 +89,20 @@ router.post("/signin", async (req, res) => {
 });
 
 //? Login Req
-router.get("/aboutBackend", Middleware, (req, res) => {
+router.get("/about", Middleware, (req, res) => {
   //? Send Message
-  res.send("hi")
-  // console.log("Hello this is AboutBackend");
-  // res.send(req.rootUser);
-  // console.log("This is Your Tokken ====>" + req.token);
-  // console.log("This is Your user ====>" + req.rootUser);
-  // res.send(req.token);
-  // res.send("hi this is About");
+  //* console.log("Hello this is About");
+  res.send(req.rootUser);
+  //* console.log("This is Your Tokken ====>" + req.token);
+  //* console.log("This is Your user ====>" + req.rootUser);
+  //* res.send(req.token);
+  //* res.send("hi this is About");
 });
 
 // Get Data for Contact && Home page
 router.get("/getData", Middleware, (req, res) => {
   // Send Message
-  console.log("Hello this is getData");
+  // console.log("Hello this is getData");
   res.send(req.rootUser);
 });
 

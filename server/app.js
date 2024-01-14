@@ -1,31 +1,32 @@
-require('dotenv').config()
-var cookieParser = require('cookie-parser')
+require('dotenv').config();
+var cookieParser = require('cookie-parser');
 const express = require('express');
-const cors = require("cors");
+var cors = require('cors');
 const app = express();
 
-app.use(cors());
+// CORS Configuration
+app.use(cors({
+    origin: "http://localhost:3000",
+    methods: ['GET', 'PUT', 'PATCH', 'DELETE'],
+    credentials: true,
+}));
+
+// Handle preflight requests explicitly
+app.options('*', cors());
 
 // Port
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
-// Database Connectio
+// Database Connection
 require('./db/conn');
-// const User = require('./model/userSchema');
 
-// Listion Json
+// JSON Parsing Middleware
 app.use(express.json());
-app.use(cookieParser())
+app.use(cookieParser());
 
-// Router Port Listoning
+// Router Port Listening
 app.use(require('./router/routh'));
 
-// Middelware 
-// const middleware = (req,res, next) => {
-//     console.log(`Hello my Middleware`);
-//     next();
-// }
-
 app.listen(PORT, () => {
-    console.log(`server is runnig at port no ${PORT}`);
-})
+    console.log(`Server is running at port no ${PORT}`);
+});

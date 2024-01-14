@@ -1,27 +1,28 @@
 import React, { useState, useEffect } from "react";
-const BackendURL = process.env.REACT_APP_BackendURL;
+const { useNavigate } = require("react-router-dom");
 
 const Home = () => {
+  const Navigate = useNavigate();
   const [userName, setUserName] = useState({});
   const [show, setShow] = useState(false);
   const userHome = async () => {
     try {
-      const res = await fetch(BackendURL+"/getData", {
+      const res = await fetch("/getData", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       const data = await res.json();
-      // console.log("UserName ======="+ data);
+      console.log(data);
       setUserName(data.name)
       setShow(true);
       if (!res.status === 200) {
         const error = new Error(res.error);
         throw error;
-        // Navigate("/");
       }
     } catch (error) {
+      Navigate("/login");
       // console.log("No Token Found");
     }
   };

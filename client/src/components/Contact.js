@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
+const { useNavigate } = require("react-router-dom");
 
 const Contact = () => {
+  const Navigate = useNavigate();
   const [userData, setUserData] = useState({
     name: "",
     email: "",
@@ -27,9 +29,9 @@ const Contact = () => {
       if (!res.status === 200) {
         const error = new Error(res.error);
         throw error;
-        // Navigate("/");
       }
     } catch (error) {
+      Navigate("/login");
       // console.log("No Token Found");
     }
   };

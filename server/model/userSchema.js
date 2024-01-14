@@ -58,7 +58,7 @@ const userSchema = new mongooose.Schema({
 });
 // Passworh Hassing
 userSchema.pre("save", async function (next) {
-  // console.log("Hi this is Middleware");
+  console.log("Hi this is Middleware");
   if (this.isModified("password")) {
     this.password = await bcrypt.hash(this.password, 13);
     this.cpassword = await bcrypt.hash(this.cpassword, 13);

@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+let BackendURL = process.env.REACT_APP_BackendURL
+
 const Signup = () => {
   const Navigate = useNavigate;
   // Get Data of Form
@@ -21,10 +23,11 @@ const Signup = () => {
   const postData = async (e) => {
     e.preventDefault();
     const { name, email, phone, password, cpassword } = user;
-    const res = await fetch("/register", {
+    const res = await fetch(BackendURL+"/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Access-Control-Allow-Origin": "*"
       },
       body: JSON.stringify({
         name,

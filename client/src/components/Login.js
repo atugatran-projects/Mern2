@@ -1,6 +1,8 @@
 import { UserContext } from "../App";
 import React, { useState, useContext } from "react";
 const { useNavigate } = require("react-router-dom");
+let BackendURL = process.env.REACT_APP_BackendURL
+
 
 const Login = () => {
   const Navigate = useNavigate();
@@ -11,8 +13,9 @@ const Login = () => {
   
   const loginUser = async (e) => {
     e.preventDefault();
-    const res = await fetch("/signin", {
+    const res = await fetch(BackendURL+"/signin", {
       method: "POST",
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
       },
