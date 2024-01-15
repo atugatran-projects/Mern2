@@ -6,7 +6,7 @@ const app = express();
 
 // CORS Configuration
 app.use(cors({
-    origin: ['https://atugatran-projects.github.io','http://localhost:3000'],
+    origin: ['https://mernloginfrontend.onrender.com/','http://localhost:3000'],
     methods: ['GET', 'PUT', 'PATCH', 'DELETE'],
     credentials: true,
 }));
