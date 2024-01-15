@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 const { useNavigate } = require("react-router-dom");
+let BackendURL = process.env.REACT_APP_BackendURL
+
 
 const Contact = () => {
   const Navigate = useNavigate();
@@ -11,12 +13,12 @@ const Contact = () => {
   });
   const userContact = async () => {
     try {
-      const res = await fetch("/getData", {
+      const res = await fetch(BackendURL+"/getData", {
         method: "GET",
+        credentials: "include",
         headers: {
           "Content-Type": "application/json",
         },
-        credentials: "include",
       });
       const data = await res.json();
       // console.log(data);
@@ -38,7 +40,7 @@ const Contact = () => {
 
   useEffect(() => {
     userContact();
-  });
+  }, []);
 
   //   We Are Storing Data in State
   const handleInput = (e) => {

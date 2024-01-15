@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 const { useNavigate } = require("react-router-dom");
+let BackendURL = process.env.REACT_APP_BackendURL
 
 const Home = () => {
   const Navigate = useNavigate();
@@ -7,8 +8,9 @@ const Home = () => {
   const [show, setShow] = useState(false);
   const userHome = async () => {
     try {
-      const res = await fetch("/getData", {
+      const res = await fetch(BackendURL+"/getData", {
         method: "GET",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },

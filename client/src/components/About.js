@@ -8,13 +8,14 @@ const About = () => {
   // console.log(userData);
   const callAboutPage = async () => {
     try {
-      const res = await fetch(BackendURL+"/about", {
+      const res = await fetch(BackendURL + "/about", {
         method: "GET",
+        credentials: 'include',
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
         },
-        credentials: "include",
+        // credentials: "include",
       });
       const data = await res.json();
       // console.log(data);
