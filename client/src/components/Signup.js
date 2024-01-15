@@ -25,9 +25,11 @@ const Signup = () => {
     const { name, email, phone, password, cpassword } = user;
     const res = await fetch(BackendURL+"/register", {
       method: "POST",
+      credentials: 'include',
       headers: {
         "Content-Type": "application/json",
-        "Access-Control-Allow-Origin": "*"
+        "Access-Control-Allow-Credentials": true,
+        // "Access-Control-Allow-Origin": "*"
       },
       body: JSON.stringify({
         name,
